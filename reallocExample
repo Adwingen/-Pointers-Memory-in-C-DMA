@@ -1,0 +1,63 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+#include <malloc.h>
+
+#define SIZE 5
+
+
+void printArry(int* arr, int size)
+{
+	int i;
+	for (i = 0; i < size; i++)
+		printf("%d ", arr[i]);
+
+	printf("\n");
+}
+
+
+
+int main()
+{
+
+	int i;
+	int* grades = NULL;
+	int* temp = NULL;
+	int totalGrades;
+
+	puts("Enter total grades: ");
+	scanf("%d", &totalGrades);
+	grades = (int*)malloc(totalGrades * sizeof(int));
+	if (!grades)
+	{
+		puts("ERROR MEMORY ALLOCATION");
+		exit(1);
+	}
+
+	for (i = 0; i < totalGrades; i++)
+	{
+		printf("Enter a grade[%d]:  \n",i+1);
+		scanf("%d", &grades[i]);
+	}
+
+	printArry(grades, totalGrades);
+
+	totalGrades = totalGrades + 2;
+	temp = (int*)realloc(grades, totalGrades * sizeof(int));
+	if (temp)
+		grades = temp;
+
+	for (i = totalGrades-2; i < totalGrades; i++)
+	{
+			printf("Enter a grade[%d]:  \n", i + 1);
+			scanf("%d", &grades[i]);	
+	}
+
+	printArry(grades, totalGrades);
+
+	return 0;
+
+}
