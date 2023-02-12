@@ -1,0 +1,66 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+#include <malloc.h>
+
+
+void printArry(int* arr, int size)
+{
+	int i;
+	for (i = 0; i < size; i++)
+		printf("%d ", arr[i]);
+
+	printf("\n");
+}
+
+int * createArray(int* numberOfElements)
+{
+	int i;
+	int* myArr;
+	int* temp;
+	int sizeT=1;
+	myArr = (int*)malloc(sizeT*sizeof(int));
+	if (!myArr)
+	{
+		printf("ERROR MEMORY ALOCATION\n");
+		exit(1);
+	}
+	for (i = 0; i < sizeT; i++)
+	{
+		printf("Enter number %d: ", i + 1);
+		scanf("%d", &myArr[i]);
+		if (myArr[i] == -1)
+		{
+			*numberOfElements = sizeT-1;
+			return myArr;
+		}
+		else
+		{
+			sizeT++;
+			temp = (int*)realloc(myArr, sizeT * sizeof(int));
+			if (temp)
+				myArr = temp;
+
+		}
+			
+	}
+	
+	free(myArr);
+		
+}
+
+int main()
+{
+
+	int* arr;
+	int numberOfElements;
+	arr = createArray(&numberOfElements);
+	printArry(arr, numberOfElements);
+	printf("\nArray SIZE %d: \n", numberOfElements);
+
+	return 0;
+
+}
