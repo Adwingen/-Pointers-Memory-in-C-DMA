@@ -1,0 +1,59 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+
+void printArr(int* arr, int size)
+{
+	int i;
+	for (i = 0; i < size; i++)
+		printf("%d ", arr[i]);
+	printf("\n");
+}
+
+void create1DArrayByRef(int arrSize, int** p)
+{
+	int* newArr;
+	int i;
+	newArr = (int*)malloc(arrSize * sizeof(int));
+
+	for (i = 0; i < arrSize; i++)
+	{
+		printf("Enter [%d] value: ",i+1);
+		scanf("%d", &newArr[i]);
+	}
+
+	*p = newArr;
+
+}
+
+void create1DArrayByRef2(int arrSize, int** p)
+{
+	
+	int i;
+	*p = (int*)malloc(arrSize * sizeof(int));
+
+	for (i = 0; i < arrSize; i++)
+	{
+		printf("Enter [%d] value: ", i + 1);
+		scanf("%d", &(*p)[i]);
+	}
+
+
+}
+
+
+
+int main()
+{
+	int size;
+	int* ptr;
+	printf("Enter the size of the array: \n");
+	scanf("%d", &size);
+	
+	create1DArrayByRef2(size, &ptr);
+
+	printArr(ptr, size);
+}
